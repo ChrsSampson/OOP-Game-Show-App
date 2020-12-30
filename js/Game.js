@@ -74,26 +74,11 @@ class Game{
         const overlay = document.getElementById('overlay');
         const button = document.getElementById('btn__reset');
         const message = document.getElementById('game-over-message');
-        let phraseLength = 0;
-        let correct = 0;
-        let spaces = 0;
-        let letters = document.querySelectorAll('li[class="letter"]')
-        // Loop through letters and check class list for show
-        letters.forEach((letter) => {
-            if(letter.classList.contains('letter')){
-                phraseLength++
-                
-                if(letter.classList.contains('show')){
-                    correct++
-                }
-            }
-            if(letter == ' '){
-                spaces++
-            }
-        })
-
+        let phraseLength = document.getElementsByClassName('letter');
+        let correct = document.getElementsByClassName('show');
+        let spaces = document.getElementsByClassName('space');
         //compare letters with show - spaces to total letters - spaces
-        if(0){
+        if(phraseLength.length == correct.length){
             message.textContent = "You Win";
             button.textContent = "Play Again?";
             overlay.classList.add('win');
