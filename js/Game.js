@@ -17,8 +17,8 @@ class Game{
     //hides the start screen overlay, calls the getRandomPhrase() method, and sets the activePhrase property with the chosen phrase.
     startGame(){
         console.log("New Game Start")
-        //reset hearts from last game
-        // this.resetHearts();
+        //reset from last game
+        this.reset();
         this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
         const overlay = document.getElementById('overlay');
@@ -35,17 +35,27 @@ class Game{
 
     //this method controls most of the game logic. It checks to see if the button clicked by the player matches a letter in the phrase, and then directs the game based on a correct or incorrect guess. 
     handleInteraction(keyPress){
-        console.info('keypress', keyPress);
+        let keys = document.querySelectorAll('div[class="keyrow"] > button')
         let check  = this.activePhrase.checkLetter(keyPress, this.activePhrase.phrase);
-        console.log(check);
+        console.info('keypress', keyPress);
         // pass key press value and active phrase to check letter
         if(check){
-            console.log('Correct')
+            //disabled the key that was pressed
+            keys.forEach((button) => {
+                if(keyPress == button.textContent){
+                button.classList.add('chosen');
+                }
+            })
             //pass in correct keepress as arg
             this.activePhrase.showMatchedLetter(keyPress);
         }
         else{
-            console.log('remove life')            
+            // Disable the key that was pressed
+            keys.forEach((button) => {
+                if(keyPress == button.textContent){
+                    button.classList.add('wrong');
+                }
+            })
             this.removeLife();
         }
         this.checkForWin();
@@ -105,11 +115,19 @@ class Game{
     }
 
     //reset life
-    resetHearts(){
+    reset(){
+        //reset score
         this.missed = 0;
+        //reset hearts
         const heartContainers = document.querySelectorAll('img[src="../images/lostHeart.png"]');
         heartContainers.forEach((container) => {
             container.src = "images/liveHeart.png";
         });
+        //reset key presses
+        let keys = document.querySelectorAll('div[class="keyrow"] > button')
+        keys.forEach((button) => {
+            button.classList.remove('wrong');
+            button.classList.remove('chosen');
+        })
     }
 }

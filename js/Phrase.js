@@ -40,21 +40,10 @@ class Phrase{
         //break down phrase into array
         let phraseArray = Array.from(currentPhrase);
         //check each letter in the array and return true if matches
-        phraseArray.forEach((letter) => {
-            if(letter == input){
-                return true;
-            }
-            // Disable the key that was pressed and return false
-            else{
-                let keys = document.querySelectorAll('div[class="keyrow"] > button')
-                keys.forEach((button) => {
-                    if(input == button.textContent){
-                    button.classList.add('wrong');
-                    }
-                })
-                return false;
-            }
-        })
+        if(phraseArray.includes(input)){
+            return true;
+        }
+        
     }
 
     /**  reveals the letter(s) on the board that matches the player's selection
@@ -67,13 +56,6 @@ class Phrase{
         letters.forEach((letter) => {
             if(letter.textContent == key){
                 letter.classList.add('show');
-            }
-        })
-        //disabled the key that was pressed
-        let keys = document.querySelectorAll('div[class="keyrow"] > button')
-        keys.forEach((button) => {
-            if(key == button.textContent){
-                button.classList.add('chosen');
             }
         })
     }
