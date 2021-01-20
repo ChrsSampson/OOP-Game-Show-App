@@ -11,7 +11,7 @@ class Game{
             new Phrase ('Show me the code'),
             new Phrase ('Tiger striped Lamborgini') 
             ];
-        this.activePhrase = 'null';
+        this.activePhrase === null;
     }
 
     //hides the start screen overlay, calls the getRandomPhrase() method, and sets the activePhrase property with the chosen phrase.
@@ -65,7 +65,7 @@ class Game{
     // this method removes a life from the scoreboard, by replacing one of the liveHeart.png images with a lostHeart.png
     removeLife(){
         const heartContainer = document.querySelector('img[src="images/liveHeart.png"]');
-        heartContainer.src = "../images/lostHeart.png";
+        heartContainer.src = "./images/lostHeart.png";
         this.missed++
     }
 
