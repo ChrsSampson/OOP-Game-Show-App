@@ -104,7 +104,7 @@ class Game{
         //reset score
         this.missed = 0;
         //reset hearts
-        const heartContainers = document.querySelectorAll('img[src="../images/lostHeart.png"]');
+        const heartContainers = document.querySelectorAll('img[src="./images/lostHeart.png"]');
         heartContainers.forEach((container) => {
             container.src = "images/liveHeart.png";
         });
