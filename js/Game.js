@@ -44,22 +44,23 @@ class Game{
             keys.forEach((button) => {
                 if(keyPress == button.textContent){
                 button.classList.add('chosen');
+                button.disabled = true;
                 }
             })
             //pass in correct keepress as arg
             this.activePhrase.showMatchedLetter(keyPress);
+            this.checkForWin();
         }
         else{
             // Disable the key that was pressed
             keys.forEach((button) => {
                 if(keyPress == button.textContent){
                     button.classList.add('wrong');
+                    button.disabled = true;
                 }
             })
             this.removeLife();
         }
-        this.checkForWin();
-        this.gameOver();
     }
 
     // this method removes a life from the scoreboard, by replacing one of the liveHeart.png images with a lostHeart.png
@@ -67,6 +68,7 @@ class Game{
         const heartContainer = document.querySelector('img[src="images/liveHeart.png"]');
         heartContainer.src = "./images/lostHeart.png";
         this.missed++
+        this.gameOver();
     }
 
     // this method checks to see if the player has revealed all of the letters in the active phrase.
@@ -76,7 +78,7 @@ class Game{
         const message = document.getElementById('game-over-message');
         let phraseLength = document.getElementsByClassName('letter');
         let correct = document.getElementsByClassName('show');
-        let spaces = document.getElementsByClassName('space');
+        
         //compare letters with show - spaces to total letters - spaces
         if(phraseLength.length == correct.length){
             message.textContent = "You Win";
@@ -113,6 +115,9 @@ class Game{
         keys.forEach((button) => {
             button.classList.remove('wrong');
             button.classList.remove('chosen');
+            button.disabled = false;
         })
+
+        overlay.classList = "start"
     }
 }
